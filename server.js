@@ -7,7 +7,7 @@ const SamlStrategy = require('passport-saml').Strategy;
 const samlify = require('samlify');
 
 const app = express();
-const fs = require('fs');
+const {readFileSync} = require('fs');
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -57,7 +57,7 @@ samlify.setSchemaValidator({ validate: () => Promise.resolve() });
 // Déclarer l’IdP
 const myIdP = samlify.IdentityProvider({
   //entityId: process.env.MYIDP_ENTITY_ID,
-  metadata: fs(__dirname + '/metadata/idp-metadata.xml'),
+  metadata: readFileSync(__dirname + '/metadata/idp-metadata.xml'),
   signingCert: idp_public_cert,
   privateKey: idp_private_key,
   wantAuthnRequestsSigned: false,
@@ -81,7 +81,7 @@ const myIdP = samlify.IdentityProvider({
 
 // Déclarer Azure AD comme SP
 const azureSP = samlify.ServiceProvider({
-    metadata : fs(__dirname + '/metadata/sp-metadata.xml')
+    metadata : readFileSync(__dirname + '/metadata/sp-metadata.xml')
 //   entityId: process.env.AZURE_IDP_ISSUER,
 //   assertionConsumerService: [
 //     {
