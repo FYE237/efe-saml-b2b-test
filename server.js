@@ -1,4 +1,4 @@
-// require('dotenv').config();
+require('dotenv').config();
 
 // const express = require('express');
 // const bodyParser = require('body-parser');
@@ -277,9 +277,11 @@ const sp = saml.ServiceProvider({
     metadata: readFileSync(__dirname + '/metadata/sp-metadata.xml')
 });
 
+const idp_private_key = process.env.MYIDP_PRIVATE_KEY
+
 const idp = saml.IdentityProvider({
     metadata: readFileSync(__dirname + '/metadata/idp-metadata.xml'),
-    // privateKey: readFileSync(__dirname + '/key/idp/private_key.pem'),
+    privateKey: idp_private_key,
     // privateKeyPass: 'jXmKf9By6ruLnUdRo90G',
     isAssertionEncrypted: false,
     loginResponseTemplate: {
