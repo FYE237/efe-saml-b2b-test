@@ -64,6 +64,10 @@ const myIdP = samlify.IdentityProvider({
     {
       Binding: samlify.Constants.namespace.binding.redirect,
       Location: process.env.MYIDP_LOGIN_URL
+    },
+    {
+      Binding: samlify.Constants.namespace.binding.post, // <-- ajouté
+      Location: process.env.MYIDP_LOGIN_URL
     }
   ]
 });
