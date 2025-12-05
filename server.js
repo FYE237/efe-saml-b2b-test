@@ -81,14 +81,14 @@ const myIdP = samlify.IdentityProvider({
 
 // Déclarer Azure AD comme SP
 const azureSP = samlify.ServiceProvider({
-    metadata : readFileSync(__dirname + '/metadata/sp-metadata.xml')
+    metadata : readFileSync(__dirname + '/metadata/sp-metadata.xml'),
 //   entityId: process.env.AZURE_IDP_ISSUER,
-//   assertionConsumerService: [
-//     {
-//       Binding: samlify.Constants.namespace.binding.post,
-//       Location: process.env.SAML_IDP_ENTRYPOINT
-//     }
-//   ]
+    assertionConsumerService: [
+        {
+        Binding: samlify.Constants.namespace.binding.post,
+        Location: process.env.SAML_IDP_ENTRYPOINT
+        }
+    ]
 });
 
 console.log("myidP", myIdP.entityMeta.getEntityID())
