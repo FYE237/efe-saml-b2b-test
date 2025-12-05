@@ -9,7 +9,8 @@
         <md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</md:NameIDFormat>
         <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
                                      Location="https://login.microsoftonline.com/2a822d8c-9176-425a-9757-1181e24cc868/saml2"
-                                     index="1" />
+                                     index="0" 
+                                     isDefault="true" />
         
     </md:SPSSODescriptor>
 </md:EntityDescriptor>
