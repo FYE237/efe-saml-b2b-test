@@ -4,7 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const SamlStrategy = require('passport-saml').Strategy;
-const saml = require('samlify');
+const samlify = require('samlify');
 
 const app = express();
 const fs = require('fs');
