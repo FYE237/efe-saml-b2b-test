@@ -89,9 +89,9 @@ const azureSP = samlify.ServiceProvider({
   ]
 });
 
-
+console.log("myidP", myIdP.entityMeta.getEntityID)
 //console.log("AZURE_IDP_ISSUER : ", process.env.AZURE_IDP_ISSUER);
-console.log('azureSP entityId:', azureSP.entityMeta.entityId);
+console.log('azureSP entityId:', azureSP.entityMeta.getEntityID());
 console.log('azureSP ACS :', azureSP.entityMeta.meta.assertionConsumerService);
 //console.log('azureSP ACS (REDIRECT):', azureSP.entityMeta.getAssertionEndpoint(samlify.Constants.namespace.binding.redirect));
 
