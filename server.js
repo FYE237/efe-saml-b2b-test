@@ -122,7 +122,7 @@ app.post('/saml/login', async (req, res) => {
 
   const { context } = await myIdP.createLoginResponse(
     azureSP,
-    "post",
+    samlify.Constants.namespace.binding.post,
     { request: SAMLRequest, relayState: RelayState },
     user
   );
