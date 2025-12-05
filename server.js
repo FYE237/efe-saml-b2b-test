@@ -69,7 +69,13 @@ const myIdP = samlify.IdentityProvider({
       Binding: samlify.Constants.namespace.binding.post, // <-- ajouté
       Location: process.env.MYIDP_LOGIN_URL
     }
-  ]
+  ],
+  singleLogoutService: [
+  {
+    Binding: samlify.Constants.namespace.binding.redirect,
+    Location: "https://google.com"
+  }
+  ],
 });
 
 // Déclarer Azure AD comme SP
@@ -83,9 +89,11 @@ const azureSP = samlify.ServiceProvider({
   ]
 });
 
+
+console.log("AZURE_IDP_ISSUER : ", process.env.AZURE_IDP_ISSUER);
 console.log('azureSP entityId:', azureSP.entityMeta.getEntityID());
-console.log('azureSP ACS (POST):', azureSP.entityMeta.getAssertionEndpoint(samlify.Constants.namespace.binding.post));
-console.log('azureSP ACS (REDIRECT):', azureSP.entityMeta.getAssertionEndpoint(samlify.Constants.namespace.binding.redirect));
+console.log('azureSP ACS :', azureSP.entityMeta.meta.assertionConsumerService);
+//console.log('azureSP ACS (REDIRECT):', azureSP.entityMeta.getAssertionEndpoint(samlify.Constants.namespace.binding.redirect));
 
 
 /* ============================================================================
