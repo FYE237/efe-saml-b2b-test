@@ -80,7 +80,7 @@ const myIdP = samlify.IdentityProvider({
 
 // Déclarer Azure AD comme SP
 const azureSP = samlify.ServiceProvider({
-  entityId: process.env.AZURE_IDP_ISSUER,
+  entityId: "https:tenant-id",
   assertionConsumerService: [
     {
       Binding: samlify.Constants.namespace.binding.post,
@@ -91,7 +91,7 @@ const azureSP = samlify.ServiceProvider({
 
 
 //console.log("AZURE_IDP_ISSUER : ", process.env.AZURE_IDP_ISSUER);
-console.log('azureSP entityId:', azureSP.entityMeta.meta.entityId);
+console.log('azureSP entityId:', azureSP.entityMeta.entityId);
 console.log('azureSP ACS :', azureSP.entityMeta.meta.assertionConsumerService);
 //console.log('azureSP ACS (REDIRECT):', azureSP.entityMeta.getAssertionEndpoint(samlify.Constants.namespace.binding.redirect));
 
