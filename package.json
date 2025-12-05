@@ -15,6 +15,7 @@
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "passport": "^0.7.0",
-    "passport-saml": "^3.2.4"
+    "passport-saml": "^3.2.4",
+    "samlify": "^2.10.2"
   }
 }
