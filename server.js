@@ -57,7 +57,7 @@ samlify.setSchemaValidator({ validate: () => Promise.resolve() });
 // Déclarer l’IdP
 const myIdP = samlify.IdentityProvider({
   //entityId: process.env.MYIDP_ENTITY_ID,
-  metadata: readFileSync(__dirname + '/metadata/idp-metadata.xml'),
+  metadata: fs(__dirname + '/metadata/idp-metadata.xml'),
   signingCert: idp_public_cert,
   privateKey: idp_private_key,
   wantAuthnRequestsSigned: false,
@@ -81,7 +81,7 @@ const myIdP = samlify.IdentityProvider({
 
 // Déclarer Azure AD comme SP
 const azureSP = samlify.ServiceProvider({
-    metadata : readFileSync(__dirname + '/metadata/sp-metadata.xml')
+    metadata : fs(__dirname + '/metadata/sp-metadata.xml')
 //   entityId: process.env.AZURE_IDP_ISSUER,
 //   assertionConsumerService: [
 //     {
