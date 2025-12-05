@@ -52,7 +52,7 @@ const idp_public_cert = process.env.MYIDP__CERT
 const idp_private_key = process.env.MYIDP_PRIVATE_KEY
 
 /* ------------------ CONFIG samlify : vrai IdP ------------------ */
-saml.setSchemaValidator({ validate: () => Promise.resolve() });
+samlify.setSchemaValidator({ validate: () => Promise.resolve() });
 
 // Déclarer l’IdP
 const myIdP = samlify.IdentityProvider({
