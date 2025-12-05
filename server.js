@@ -56,40 +56,42 @@ samlify.setSchemaValidator({ validate: () => Promise.resolve() });
 
 // Déclarer l’IdP
 const myIdP = samlify.IdentityProvider({
-  entityId: process.env.MYIDP_ENTITY_ID,
+  //entityId: process.env.MYIDP_ENTITY_ID,
+  metadata: readFileSync(__dirname + '/metadata/idp-metadata.xml'),
   signingCert: idp_public_cert,
   privateKey: idp_private_key,
   wantAuthnRequestsSigned: false,
-  singleSignOnService: [
-    {
-      Binding: samlify.Constants.namespace.binding.redirect,
-      Location: process.env.MYIDP_LOGIN_URL
-    },
-    {
-      Binding: samlify.Constants.namespace.binding.post, // <-- ajouté
-      Location: process.env.MYIDP_LOGIN_URL
-    }
-  ],
-  singleLogoutService: [
-  {
-    Binding: samlify.Constants.namespace.binding.redirect,
-    Location: "https://google.com"
-  }
-  ],
+//   singleSignOnService: [
+//     {
+//       Binding: samlify.Constants.namespace.binding.redirect,
+//       Location: process.env.MYIDP_LOGIN_URL
+//     },
+//     {
+//       Binding: samlify.Constants.namespace.binding.post, // <-- ajouté
+//       Location: process.env.MYIDP_LOGIN_URL
+//     }
+//   ],
+//   singleLogoutService: [
+//   {
+//     Binding: samlify.Constants.namespace.binding.redirect,
+//     Location: "https://google.com"
+//   }
+//   ],
 });
 
 // Déclarer Azure AD comme SP
 const azureSP = samlify.ServiceProvider({
-  entityId: process.env.AZURE_IDP_ISSUER,
-  assertionConsumerService: [
-    {
-      Binding: samlify.Constants.namespace.binding.post,
-      Location: process.env.SAML_IDP_ENTRYPOINT
-    }
-  ]
+    metadata : readFileSync(__dirname + '/metadata/sp-metadata.xml')
+//   entityId: process.env.AZURE_IDP_ISSUER,
+//   assertionConsumerService: [
+//     {
+//       Binding: samlify.Constants.namespace.binding.post,
+//       Location: process.env.SAML_IDP_ENTRYPOINT
+//     }
+//   ]
 });
 
-console.log("myidP", myIdP.entityMeta.getEntityID)
+console.log("myidP", myIdP.entityMeta.getEntityID())
 //console.log("AZURE_IDP_ISSUER : ", process.env.AZURE_IDP_ISSUER);
 console.log('azureSP entityId:', azureSP.entityMeta.getEntityID());
 console.log('azureSP ACS :', azureSP.entityMeta.meta.assertionConsumerService);
