@@ -15,32 +15,32 @@ app.use(passport.initialize());
 
 
 
-/* Configuration en tant que Service Provider*/
-const samlStrategy = new SamlStrategy(
-  {
-    entryPoint: process.env.SAML_IDP_ENTRYPOINT, // Azure AD SAML endpoint
-    issuer: process.env.SAML_SP_ISSUER,
-    callbackUrl: process.env.SAML_SP_ACS, // ACS endpoint
-    cert: process.env.SAML_IDP_CERT
-  },
-  (profile, done) => {
-    console.log('SAML profile:', profile);
-    return done(null, profile);
-  }
-);
+// /* Configuration en tant que Service Provider*/
+// const samlStrategy = new SamlStrategy(
+//   {
+//     entryPoint: process.env.SAML_IDP_ENTRYPOINT, // Azure AD SAML endpoint
+//     issuer: process.env.SAML_SP_ISSUER,
+//     callbackUrl: process.env.SAML_SP_ACS, // ACS endpoint
+//     cert: process.env.SAML_IDP_CERT
+//   },
+//   (profile, done) => {
+//     console.log('SAML profile:', profile);
+//     return done(null, profile);
+//   }
+// );
 
-passport.use(samlStrategy);
+// passport.use(samlStrategy);
 
-app.get('/', (req, res) => {
-//   console.log ("ACS = ", process.env.SAML_SP_ACS);
-//   console.log ("Issuer = ", process.env.SAML_SP_ISSUER)
-  res.send('Node.js SAML app fonctionnelle !');
-});
+// app.get('/', (req, res) => {
+// //   console.log ("ACS = ", process.env.SAML_SP_ACS);
+// //   console.log ("Issuer = ", process.env.SAML_SP_ISSUER)
+//   res.send('Node.js SAML app fonctionnelle !');
+// });
 
-// ACS endpoint pour recevoir SAMLResponse
-app.post('/saml/acs', passport.authenticate('saml', { session: false }), (req, res) => {
-  res.send(`Bienvenue ${JSON.stringify(req.user)}`);
-});
+// // ACS endpoint pour recevoir SAMLResponse
+// app.post('/saml/acs', passport.authenticate('saml', { session: false }), (req, res) => {
+//   res.send(`Bienvenue ${JSON.stringify(req.user)}`);
+// });
 
 
 
